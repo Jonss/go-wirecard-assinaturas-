@@ -25,6 +25,7 @@ const (
 const (
 	CreditCard paymentMethod = "CREDIT_CARD"
 	Boleto     paymentMethod = "BOLETO"
+	All        paymentMethod = "ALL"
 )
 
 // Interval entity
