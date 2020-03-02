@@ -1,13 +1,12 @@
-package plan
+package subs
 
 import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/Jonss/go-wirecard-assinaturas/requests"
+	"github.com/Jonss/go-wirecard-assinaturas/subs/requests"
 )
 
-type paymentMethod string
 type unit string
 type status string
 
@@ -20,12 +19,6 @@ const (
 	Day   unit = "DAY"
 	Month unit = "MONTH"
 	Year  unit = "YEAR"
-)
-
-const (
-	CreditCard paymentMethod = "CREDIT_CARD"
-	Boleto     paymentMethod = "BOLETO"
-	All        paymentMethod = "ALL"
 )
 
 // Interval entity
@@ -51,7 +44,7 @@ type Plan struct {
 	Interval      *Interval     `json:"interval,omitempty"`
 	BillingCycles *int          `json:"billing_cycles,omitempty"`
 	Trial         *Trial        `json:"trial,omitempty"`
-	PaymentMethod paymentMethod `json:"payment_method,omitempty"`
+	PaymentMethod PaymentMethod `json:"payment_method,omitempty"`
 	Status        status        `json:"status,omitempty"`
 }
 
@@ -60,8 +53,8 @@ type Plans struct {
 	Plans []Plan `json:"plans"`
 }
 
-// Create a plan in Wirecard
-func (p Plan) Create() (map[string]interface{}, error) {
+// CreatePlan a plan in Wirecard
+func (p Plan) CreatePlan() (map[string]interface{}, error) {
 	plan, _ := json.Marshal(p)
 	resp, err := requests.Do(requests.POST, "/plans", plan)
 	if err != nil || resp.StatusCode > 299 {
@@ -75,8 +68,8 @@ func (p Plan) Create() (map[string]interface{}, error) {
 	return result, nil
 }
 
-// List all plans of account
-func List() (Plans, error) {
+// ListPlans all plans of account
+func ListPlans() (Plans, error) {
 	resp, err := requests.Do(requests.GET, "/plans", nil)
 	if err != nil || resp.StatusCode > 299 {
 		return Plans{}, fmt.Errorf("An error occurred listing plans. StatusCode [%d]", resp.StatusCode)
@@ -87,8 +80,8 @@ func List() (Plans, error) {
 	return plans, nil
 }
 
-// Find plan by code
-func Find(code string) (Plan, error) {
+// FindPlan plan by code
+func FindPlan(code string) (Plan, error) {
 	resp, err := requests.Do(requests.GET, "/plans/"+code, nil)
 	if err != nil || resp.StatusCode > 299 {
 		return Plan{}, fmt.Errorf("An error occurred finding plan with code %s. StatusCode [%d]", code, resp.StatusCode)
@@ -99,8 +92,8 @@ func Find(code string) (Plan, error) {
 	return p, nil
 }
 
-// Activate plan by code
-func Activate(code string) (string, error) {
+// ActivatePlan plan by code
+func ActivatePlan(code string) (string, error) {
 	resp, err := requests.Do(requests.PUT, "/plans/"+code+"/activate", nil)
 	if err != nil || resp.StatusCode > 299 {
 		return "Erro na ativação do plano", fmt.Errorf("An error occurred activating plan with code %s. StatusCode [%d]", code, resp.StatusCode)
@@ -109,8 +102,8 @@ func Activate(code string) (string, error) {
 	return "Plano ativado com sucesso", nil
 }
 
-// Inactivate plan by code
-func Inactivate(code string) (string, error) {
+// InactivatePlan by code
+func InactivatePlan(code string) (string, error) {
 	resp, err := requests.Do(requests.PUT, "/plans/"+code+"/inactivate", nil)
 	if err != nil || resp.StatusCode > 299 {
 		return "Erro na inativação do plano", fmt.Errorf("An error occurred inactivating plan with code %s. StatusCode [%d]", code, resp.StatusCode)
@@ -119,8 +112,8 @@ func Inactivate(code string) (string, error) {
 	return "Plano desativado com sucesso", nil
 }
 
-// Update plan
-func (p Plan) Update(code string) (string, error) {
+// UpdatePlan by code
+func (p Plan) UpdatePlan(code string) (string, error) {
 	plan, _ := json.Marshal(p)
 
 	resp, err := requests.Do(requests.PUT, "/plans/"+code, plan)

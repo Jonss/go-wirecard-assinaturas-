@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Jonss/go-wirecard-assinaturas/config"
-	"github.com/Jonss/go-wirecard-assinaturas/plan"
+	"github.com/Jonss/go-wirecard-assinaturas/subs"
+	"github.com/Jonss/go-wirecard-assinaturas/subs/config"
 )
 
 func init() {
@@ -15,16 +15,16 @@ func init() {
 }
 
 func TestCreatePlan(t *testing.T) {
-	plan := &plan.Plan{
+	plan := &subs.Plan{
 		Code:          "plan_code",
 		Name:          "plan_name",
 		Description:   "This is a plan test",
 		Amount:        1096,
-		PaymentMethod: plan.CreditCard,
-		Status:        plan.Active,
+		PaymentMethod: subs.CREDIT_CARD,
+		Status:        subs.Active,
 	}
 
-	planJSON, err := plan.Create()
+	planJSON, err := plan.CreatePlan()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -33,20 +33,19 @@ func TestCreatePlan(t *testing.T) {
 }
 
 func TestGetPlans(t *testing.T) {
-	plans, err := plan.List()
+	plans, err := subs.ListPlans()
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	for _, p := range plans.Plans {
 		fmt.Println(p.Code)
-		fmt.Println("-----------------------")
 	}
 
 }
 
 func TestGetPlan(t *testing.T) {
-	plan, err := plan.Find("plan_code") // change it
+	plan, err := subs.FindPlan("plan_code") // change it
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -55,7 +54,7 @@ func TestGetPlan(t *testing.T) {
 }
 
 func TestActivatePlan(t *testing.T) {
-	message, err := plan.Activate("plan_code") // change it
+	message, err := subs.ActivatePlan("plan_code") // change it
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -64,7 +63,7 @@ func TestActivatePlan(t *testing.T) {
 }
 
 func TestInactivatePlan(t *testing.T) {
-	message, err := plan.Inactivate("plan_code") // change it
+	message, err := subs.InactivatePlan("plan_code") // change it
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -73,12 +72,12 @@ func TestInactivatePlan(t *testing.T) {
 }
 
 func TestUpdatePlan(t *testing.T) {
-	plan := &plan.Plan{
+	plan := &subs.Plan{
 		Amount: 99999,
 		Name:   "Plano topperson",
 	}
 
-	planJSON, err := plan.Update("plan_code") // change it
+	planJSON, err := plan.UpdatePlan("plan_code") // change it
 	if err != nil {
 		fmt.Println(err.Error())
 	}

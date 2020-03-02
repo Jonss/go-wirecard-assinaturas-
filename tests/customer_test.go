@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Jonss/go-wirecard-assinaturas/config"
-	"github.com/Jonss/go-wirecard-assinaturas/customer"
+	"github.com/Jonss/go-wirecard-assinaturas/subs"
+	"github.com/Jonss/go-wirecard-assinaturas/subs/config"
 )
 
 func init() {
@@ -16,7 +16,7 @@ func init() {
 }
 
 func TestCreateCustomer(t *testing.T) {
-	c := customer.Customer{
+	c := subs.Customer{
 		Code:           "customer-wirecard-api-code-2",
 		Email:          "myemail@myemail.com",
 		Document:       "43363273002",
@@ -26,7 +26,7 @@ func TestCreateCustomer(t *testing.T) {
 		BirthdateDay:   "02",
 		BirthdateMonth: "05",
 		BirthdateYear:  "1988",
-		Address: customer.Address{
+		Address: &subs.Address{
 			Street:   "Av. Brigadeiro Faria Lima",
 			Number:   "3064",
 			District: "Itaim Bibi",
@@ -35,8 +35,8 @@ func TestCreateCustomer(t *testing.T) {
 			Country:  "BRA",
 			Zipcode:  "01451001",
 		},
-		BillingInfo: customer.BillingInfo{
-			CreditCard: customer.CreditCard{
+		BillingInfo: &subs.BillingInfo{
+			CreditCard: subs.CreditCard{
 				HolderName:      "My Fullname",
 				Number:          "5555666677778884",
 				ExpirationMonth: "12",
@@ -47,7 +47,7 @@ func TestCreateCustomer(t *testing.T) {
 
 	fmt.Println(c)
 
-	m, err := c.Create()
+	m, err := c.CreateCustomer()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -57,7 +57,7 @@ func TestCreateCustomer(t *testing.T) {
 }
 
 func TestFindCustomer(t *testing.T) {
-	c, err := customer.Find("customer-wirecard-api-code-2")
+	c, err := subs.FindCustomer("customer-wirecard-api-code-2")
 	if err != nil {
 		fmt.Println(err.Error())
 	}

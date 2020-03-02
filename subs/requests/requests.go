@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Jonss/go-wirecard-assinaturas/config"
+	"github.com/Jonss/go-wirecard-assinaturas/subs/config"
 )
 
 type httpMethod string
@@ -31,6 +31,7 @@ func Do(method httpMethod, endpoint string, body []byte) (*http.Response, error)
 
 	if err != nil {
 		fmt.Println("An error occurred %s on request to %s - %s", err.Error(), string(method), endpoint)
+		return nil, err
 	}
 
 	req.SetBasicAuth(token, key)
