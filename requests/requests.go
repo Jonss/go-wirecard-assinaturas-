@@ -15,7 +15,8 @@ const (
 	GET httpMethod = "GET"
 	//POST method
 	POST httpMethod = "POST"
-	PUT  httpMethod = "PUT"
+	// PUT method
+	PUT httpMethod = "PUT"
 )
 
 // Do executes a request
@@ -27,10 +28,9 @@ func Do(method httpMethod, endpoint string, body []byte) (*http.Response, error)
 	url := string(wirecardConfig.Env) + endpoint
 
 	req, err := http.NewRequest(string(method), url, bytes.NewBuffer(body))
-	fmt.Println(req)
-	fmt.Println(req.Body)
+
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("An error occurred %s on request to %s - %s", err.Error(), string(method), endpoint)
 	}
 
 	req.SetBasicAuth(token, key)

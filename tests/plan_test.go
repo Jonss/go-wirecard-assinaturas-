@@ -10,8 +10,8 @@ import (
 
 func init() {
 	config.WirecardConfig.Env = config.SANDBOX
-	config.WirecardConfig.Key = ""
 	config.WirecardConfig.Token = ""
+	config.WirecardConfig.Key = ""
 }
 
 func TestCreatePlan(t *testing.T) {
