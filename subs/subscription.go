@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Jonss/go-wirecard-assinaturas/subs/requests"
+	"github.com/Jonss/go-wirecard-subs/subs/requests"
 )
 
 // Subscription represents a subscription on Wirecard

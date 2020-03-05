@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/Jonss/go-wirecard-assinaturas/subs/requests"
+	"github.com/Jonss/go-wirecard-subs/subs/requests"
 )
 
 type unit string

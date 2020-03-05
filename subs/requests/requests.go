@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Jonss/go-wirecard-assinaturas/subs/config"
+	"github.com/Jonss/go-wirecard-subs/subs/config"
 )
 
 type httpMethod string

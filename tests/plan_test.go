@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Jonss/go-wirecard-assinaturas/subs"
-	"github.com/Jonss/go-wirecard-assinaturas/subs/config"
+	"github.com/Jonss/go-wirecard-subs/subs"
+	"github.com/Jonss/go-wirecard-subs/subs/config"
 )
 
 func init() {
