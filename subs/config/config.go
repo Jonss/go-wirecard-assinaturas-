@@ -4,17 +4,17 @@ package config
 var WirecardConfig wirecardConfig
 
 // Env represents wirecard environment.
-type env string
+type Env string
 
 const (
 	// PROD sets production wirecard url
-	PROD env = "https://api.moip.com.br/assinaturas/v1"
+	PROD Env = "https://api.moip.com.br/assinaturas/v1"
 	// SANDBOX sets production wirecard url
-	SANDBOX env = "https://sandbox.moip.com.br/assinaturas/v1"
+	SANDBOX Env = "https://sandbox.moip.com.br/assinaturas/v1"
 )
 
 type wirecardConfig struct {
-	Env   env
+	Env   Env
 	Token string
 	Key   string
 }
