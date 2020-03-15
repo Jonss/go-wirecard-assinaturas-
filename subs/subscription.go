@@ -71,11 +71,12 @@ func (s Subscription) CreateSubscription() (*Response, error) {
 	subscription, _ := json.Marshal(s)
 	resp, err := requests.Do(requests.POST, "/subscriptions?new_customer="+newCustomer, subscription)
 	if err != nil || resp.StatusCode > 299 {
+		fmt.Println(resp)
 		return nil, fmt.Errorf("An error occurred creating subscription with code %s. StatusCode [%d]", code, resp.StatusCode)
 	}
 
 	var subsResponse *Response
-	json.NewDecoder(resp.Body).Decode(subsResponse)
+	json.NewDecoder(resp.Body).Decode(&subsResponse)
 
 	return subsResponse, nil
 }

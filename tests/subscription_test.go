@@ -17,7 +17,7 @@ func init() {
 
 func TestCreateSubscription(t *testing.T) {
 	s := subs.Subscription{
-		Code:          "subscription-wirecard-api-code-7",
+		Code:          "subscription-wirecard-api-code-9",
 		Amount:        10000,
 		PaymentMethod: subs.CREDIT_CARD,
 		ProRata:       true,
@@ -36,6 +36,15 @@ func TestCreateSubscription(t *testing.T) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+
+	fmt.Println(subscription.Amount)
+	fmt.Println(subscription.Alerts)
+	fmt.Println(subscription.Code)
+	fmt.Println(subscription.Customer.Address)
+	fmt.Println(subscription.Invoice.Status)
+	fmt.Println(subscription.Message)
+	fmt.Println(subscription.NextInvoiceDate)
+	fmt.Println(subscription.Plan.Name)
 
 	subscriptionJSON, err := json.Marshal(subscription)
 	if err != nil {
